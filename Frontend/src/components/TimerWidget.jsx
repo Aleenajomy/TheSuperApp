@@ -218,7 +218,7 @@ const TimerWidget = () => {
             onClick={handleStartStop}
             className={`timer-action-btn ${isRunning ? "running" : ""}`}
           >
-            {isRunning ? "Pause" : "Start"}
+            {isRunning ? "Pause" : (secondsLeft < totalSeconds && secondsLeft > 0 ? "Resume" : "Start")}
           </button>
           <button
             onClick={handleReset}

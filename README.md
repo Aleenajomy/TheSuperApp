@@ -23,8 +23,8 @@ GitHub: [https://github.com/Aleenajomy/TheSuperApp.git](https://github.com/Aleen
 - **User Profile Widget:** Displays user details, avatar, and tags of chosen category interests.
 - **Live Weather Widget:** Fetches live weather (temperature, pressure, humidity, wind speed, atmospheric conditions) based on location utilizing OpenWeatherMap API, falling back to a structured mock view if no key is configured.
 - **Self-Rotating News Feed:** A live news card fetching from NewsAPI, rotating through articles dynamically.
-- **Notes Widget:** A fully persistent note pad syncing input state directly to local storage to persist user inputs.
-- **Timer Widget:** Built with a custom animated SVG progress circle, up/down time selector controls, and a custom synthesized audio alarm using the Web Audio API (no external assets required) which triggers an alert upon reaching zero.
+- **Notes Widget:** A fully persistent notepad syncing input state directly to local storage as you type. Includes an inline **Clear** button in the header to wipe your notes in one click.
+- **Timer Widget:** Built with an animated SVG progress circle, Chevron time selector controls, and a synthesized audio alarm (via Web Audio API) which triggers a browser notification when reaching zero. Supports **Start**, **Pause**, **Resume** (with dynamic button labeling), and **Reset** functionality.
 
 ### 4. Movies Browse Page & Modals
 - **Categorized Feed:** Fetches movies from the OMDB API categorized by selected genres.

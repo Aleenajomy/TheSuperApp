@@ -44,19 +44,54 @@ const newsClient = axios.create({
 
 export const fetchTopHeadlines = async (category = "general", apiKey = "") => {
   const key = apiKey || import.meta.env.VITE_NEWS_API_KEY || "";
-  if (!key) {
-    return MOCK_NEWS;
+  
+  if (key) {
+    try {
+      const response = await newsClient.get(
+        `/top-headlines?category=${category}&language=en&apiKey=${key}`
+      );
+      const articles = (response.data.articles || []).filter(
+        (a) => a.title && a.urlToImage && a.description
+      );
+      if (articles.length > 0) {
+        return articles;
+      }
+    } catch (error) {
+      console.warn("Official NewsAPI failure, attempting fallback mirror:", error);
+    }
   }
+
+  // Fallback to saurav.tech/NewsAPI cached mirror (no API key or CORS/localhost restrictions in production)
   try {
-    const response = await newsClient.get(
-      `/top-headlines?category=${category}&language=en&apiKey=${key}`
+    // Attempt to fetch Indian headlines first (highly relevant regional/English news)
+    const response = await axios.get(
+      `https://saurav.tech/NewsAPI/top-headlines/category/${category}/in.json`
     );
     const articles = (response.data.articles || []).filter(
       (a) => a.title && a.urlToImage && a.description
     );
-    return articles.length > 0 ? articles : MOCK_NEWS;
-  } catch (error) {
-    console.warn("News service failure, using fallback mock news:", error);
-    return MOCK_NEWS;
+    if (articles.length > 0) {
+      return articles;
+    }
+  } catch (fallbackError) {
+    // Fall back to US headlines (global English news) if Indian headlines fetch fails
+    try {
+      const response = await axios.get(
+        `https://saurav.tech/NewsAPI/top-headlines/category/${category}/us.json`
+      );
+      const articles = (response.data.articles || []).filter(
+        (a) => a.title && a.urlToImage && a.description
+      );
+      if (articles.length > 0) {
+        return articles;
+      }
+    } catch (usFallbackError) {
+      console.warn(
+        "Fallback news mirror failed for both region codes, using local mock news:",
+        usFallbackError
+      );
+    }
   }
+
+  return MOCK_NEWS;
 };

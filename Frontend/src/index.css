@@ -737,6 +737,15 @@ body {
   margin-top: 14px;
 }
 
+.timer-actions-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 80%;
+  max-width: 280px;
+}
+
 .timer-action-btn {
   background-color: #FF5E7E;
   color: #ffffff;
@@ -744,11 +753,11 @@ body {
   font-weight: 700;
   border: none;
   border-radius: 30px;
-  padding: 10px 60px;
+  padding: 10px 24px;
   cursor: pointer;
   transition: background-color 0.2s, transform 0.1s;
-  width: 80%;
-  max-width: 280px;
+  flex: 1;
+  text-align: center;
 }
 
 .timer-action-btn:hover {
@@ -756,6 +765,29 @@ body {
 }
 
 .timer-action-btn:active {
+  transform: scale(0.98);
+}
+
+.timer-reset-btn {
+  background-color: transparent;
+  border: 2px solid #7F8C8D;
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border-radius: 30px;
+  padding: 8px 24px;
+  cursor: pointer;
+  transition: all 0.2s, transform 0.1s;
+  flex: 1;
+  text-align: center;
+}
+
+.timer-reset-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+}
+
+.timer-reset-btn:active {
   transform: scale(0.98);
 }
 
@@ -1423,9 +1455,16 @@ body {
     font-size: 0.7rem;
   }
 
-  .timer-action-btn {
+  .timer-actions-container {
     width: 90%;
-    padding: 10px 40px;
+    max-width: none;
+    gap: 12px;
+  }
+
+  .timer-action-btn,
+  .timer-reset-btn {
+    padding: 10px 16px;
+    font-size: 1.05rem;
   }
 
   .timer-right-controls {

@@ -213,12 +213,20 @@ const TimerWidget = () => {
           </div>
         </div>
 
-        <button
-          onClick={handleStartStop}
-          className={`timer-action-btn ${isRunning ? "running" : ""}`}
-        >
-          {isRunning ? "Pause" : "Start"}
-        </button>
+        <div className="timer-actions-container">
+          <button
+            onClick={handleStartStop}
+            className={`timer-action-btn ${isRunning ? "running" : ""}`}
+          >
+            {isRunning ? "Pause" : "Start"}
+          </button>
+          <button
+            onClick={handleReset}
+            className="timer-reset-btn"
+          >
+            Reset
+          </button>
+        </div>
       </div>
     </div>
   );

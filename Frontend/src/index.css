@@ -1050,7 +1050,7 @@ body {
   overflow: hidden;
   cursor: pointer;
   position: relative;
-  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s;
+  transition: box-shadow 0.3s;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
@@ -1059,6 +1059,7 @@ body {
   aspect-ratio: 0.67;
   object-fit: cover;
   display: block;
+  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .movie-poster-fallback {
@@ -1075,6 +1076,7 @@ body {
   border-radius: 12px;
   color: #94A3B8;
   gap: 12px;
+  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .fallback-movie-icon {
@@ -1135,8 +1137,15 @@ body {
 }
 
 .movie-card:hover {
-  transform: scale(1.05);
   box-shadow: 0 8px 24px rgba(20, 138, 8, 0.4);
+}
+
+.movie-card:hover .movie-poster {
+  transform: scale(1.06);
+}
+
+.movie-card:hover .movie-poster-fallback {
+  transform: scale(1.06);
 }
 
 /* ==========================================================================

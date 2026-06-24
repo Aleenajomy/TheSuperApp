@@ -11,7 +11,14 @@ const NotesWidget = () => {
 
   return (
     <div className="notes-widget">
-      <h2 className="notes-title">All notes</h2>
+      <div className="notes-header">
+        <h2 className="notes-title">All notes</h2>
+        {notes && (
+          <button className="notes-clear-btn" onClick={() => setNotes("")}>
+            Clear
+          </button>
+        )}
+      </div>
       <textarea
         className="notes-textarea"
         value={notes}

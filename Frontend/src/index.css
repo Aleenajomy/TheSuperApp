@@ -602,12 +602,40 @@ body {
   padding: 30px;
 }
 
+.notes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
 .notes-title {
   font-size: 2rem;
   font-weight: 700;
   color: #000000;
   text-align: left;
-  margin-bottom: 20px;
+}
+
+.notes-clear-btn {
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  color: #000000;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 4px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s, transform 0.1s;
+}
+
+.notes-clear-btn:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+  border-color: #000000;
+}
+
+.notes-clear-btn:active {
+  transform: scale(0.95);
 }
 
 .notes-textarea {

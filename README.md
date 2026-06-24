@@ -5,8 +5,9 @@ A premium, fully responsive React single-page application integrating registrati
 ---
 
 ## 🚀 Live Repository Link
-GitHub: [https://github.com/Aleenajomy/TheSuperApp.git](https://github.com/Aleenajomy/TheSuperApp.git)
-Live Url:[https://thesuperapp.onrender.com}(https://thesuperapp.onrender.com)
+GitHub: [https://github.com/Aleenajomy/TheSuperApp.git](https://github.com/Aleenajomy/TheSuperApp.git).
+
+Live Url:[https://thesuperapp.onrender.com](https://thesuperapp.onrender.com)
 
 ---
 

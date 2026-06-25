@@ -61,9 +61,28 @@ export const fetchTopHeadlines = async (category = "general", apiKey = "") => {
     }
   }
 
-  // Fallback to saurav.tech/NewsAPI cached mirror (no API key or CORS/localhost restrictions in production)
+  // Fallback 1: Fetch live, real-time news using RSS-to-JSON converter on BBC News RSS
   try {
-    // Attempt to fetch Indian headlines first (highly relevant regional/English news)
+    const response = await axios.get(
+      "https://api.rss2json.com/v1/api.json?rss_url=http://feeds.bbci.co.uk/news/rss.xml"
+    );
+    const items = response.data.items || [];
+    if (items.length > 0) {
+      const mappedArticles = items.map((item) => ({
+        title: item.title,
+        publishedAt: item.pubDate,
+        description: item.description,
+        urlToImage: item.thumbnail || (item.enclosure && item.enclosure.link) || "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=800",
+        source: { name: "BBC News" }
+      }));
+      return mappedArticles;
+    }
+  } catch (rssError) {
+    console.warn("Live RSS news fetch failed, attempting static mirror fallback:", rssError);
+  }
+
+  // Fallback 2: Fallback to saurav.tech/NewsAPI cached mirror (static 2022 news)
+  try {
     const response = await axios.get(
       `https://saurav.tech/NewsAPI/top-headlines/category/${category}/in.json`
     );
@@ -74,7 +93,6 @@ export const fetchTopHeadlines = async (category = "general", apiKey = "") => {
       return articles;
     }
   } catch (fallbackError) {
-    // Fall back to US headlines (global English news) if Indian headlines fetch fails
     try {
       const response = await axios.get(
         `https://saurav.tech/NewsAPI/top-headlines/category/${category}/us.json`

@@ -97,54 +97,60 @@ const Categories = () => {
   const isMinRequiredSatisfied = selected.length >= 3;
 
   return (
-    <div className="categories-page">
-      <div className="categories-left">
-        <h1 className="brand-logo">Super app</h1>
-        <h2 className="categories-heading">Choose your entertainment category</h2>
+    <div className="categories-page container-fluid min-vh-100 p-4 p-md-5 bg-black text-white">
+      <div className="row g-5">
+        <div className="categories-left col-12 col-lg-5 d-flex flex-column text-start justify-content-between">
+          <div>
+            <h1 className="brand-logo mb-4">Super app</h1>
+            <h2 className="categories-heading display-4 fw-bold mb-4 text-white">Choose your entertainment category</h2>
 
-        <div className="selected-chips-container">
-          {selected.map((catId) => {
-            const cat = CATEGORIES_DATA.find((c) => c.id === catId);
-            return (
-              <div
-                key={catId}
-                className="selected-chip"
-                onClick={() => handleDeselect(catId)}
-              >
-                <span>{cat?.name}</span>
-                <span className="deselect-x">X</span>
-              </div>
-            );
-          })}
-        </div>
-
-        {!isMinRequiredSatisfied && (
-          <div className="min-categories-error">
-            <AlertTriangle size={18} className="error-icon" />
-            <span>Minimum 3 category required</span>
+            <div className="selected-chips-container d-flex flex-wrap gap-2 mb-4">
+              {selected.map((catId) => {
+                const cat = CATEGORIES_DATA.find((c) => c.id === catId);
+                return (
+                  <div
+                    key={catId}
+                    className="selected-chip badge bg-success d-inline-flex align-items-center gap-2 p-2 px-3 rounded-pill cursor-pointer"
+                    onClick={() => handleDeselect(catId)}
+                    style={{ fontSize: "0.95rem" }}
+                  >
+                    <span>{cat?.name}</span>
+                    <span className="deselect-x bg-white text-success rounded-circle d-flex align-items-center justify-content-center" style={{ width: "16px", height: "16px", fontSize: "0.7rem", fontWeight: "bold" }}>X</span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        )}
-      </div>
 
-      <div className="categories-right">
-        <div className="categories-grid">
-          {CATEGORIES_DATA.map((cat) => (
-            <CategoryCard
-              key={cat.id}
-              category={cat}
-              isSelected={selected.includes(cat.id)}
-              onToggle={handleToggle}
-            />
-          ))}
+          {!isMinRequiredSatisfied && (
+            <div className="min-categories-error text-danger d-flex align-items-center gap-2 mt-2">
+              <AlertTriangle size={18} />
+              <span>Minimum 3 categories required</span>
+            </div>
+          )}
         </div>
 
-        <button
-          className="next-page-btn"
-          disabled={!isMinRequiredSatisfied}
-          onClick={handleNext}
-        >
-          Next Page
-        </button>
+        <div className="categories-right col-12 col-lg-7 d-flex flex-column align-items-end gap-4">
+          <div className="row row-cols-2 row-cols-md-3 g-3 w-100">
+            {CATEGORIES_DATA.map((cat) => (
+              <div className="col" key={cat.id}>
+                <CategoryCard
+                  category={cat}
+                  isSelected={selected.includes(cat.id)}
+                  onToggle={handleToggle}
+                />
+              </div>
+            ))}
+          </div>
+
+          <button
+            className="btn btn-success rounded-pill px-5 py-2 fs-5 fw-bold mt-2"
+            disabled={!isMinRequiredSatisfied}
+            onClick={handleNext}
+          >
+            Next Page
+          </button>
+        </div>
       </div>
     </div>
   );

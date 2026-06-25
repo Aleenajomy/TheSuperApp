@@ -72,80 +72,80 @@ const RegistrationForm = () => {
   };
 
   return (
-    <form onSubmit={handleFormSubmission} className="register-form">
-      <div className="form-group">
+    <form onSubmit={handleFormSubmission} className="register-form w-100">
+      <div className="form-group mb-3">
         <input
           type="text"
           placeholder="Name"
-          className={errors.name ? "error-input" : ""}
+          className={`form-control form-control-lg bg-dark text-white border-secondary ${errors.name ? "is-invalid" : ""}`}
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         />
-        {errors.name && <span className="error-text">{errors.name}</span>}
+        {errors.name && <div className="invalid-feedback text-start">{errors.name}</div>}
       </div>
 
-      <div className="form-group">
+      <div className="form-group mb-3">
         <input
           type="text"
           placeholder="Username"
-          className={errors.username ? "error-input" : ""}
+          className={`form-control form-control-lg bg-dark text-white border-secondary ${errors.username ? "is-invalid" : ""}`}
           value={formData.username}
           onChange={(e) => setFormData({ ...formData, username: e.target.value })}
         />
-        {errors.username && <span className="error-text">{errors.username}</span>}
+        {errors.username && <div className="invalid-feedback text-start">{errors.username}</div>}
       </div>
 
-      <div className="form-group">
+      <div className="form-group mb-3">
         <input
           type="email"
           placeholder="Email"
-          className={errors.email ? "error-input" : ""}
+          className={`form-control form-control-lg bg-dark text-white border-secondary ${errors.email ? "is-invalid" : ""}`}
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
-        {errors.email && <span className="error-text">{errors.email}</span>}
+        {errors.email && <div className="invalid-feedback text-start">{errors.email}</div>}
       </div>
 
-      <div className="form-group">
+      <div className="form-group mb-3">
         <input
           type="text"
           placeholder="Mobile"
-          className={errors.mobile ? "error-input" : ""}
+          className={`form-control form-control-lg bg-dark text-white border-secondary ${errors.mobile ? "is-invalid" : ""}`}
           value={formData.mobile}
           onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
         />
-        {errors.mobile && <span className="error-text">{errors.mobile}</span>}
+        {errors.mobile && <div className="invalid-feedback text-start">{errors.mobile}</div>}
       </div>
 
-      <div className="checkbox-group">
-        <label className="checkbox-label">
-          <input
-            type="checkbox"
-            checked={formData.shareData}
-            onChange={(e) => setFormData({ ...formData, shareData: e.target.checked })}
-          />
-          <span className="checkbox-text">
-            Share my registration data with Superapp
-          </span>
+      <div className="form-check text-start mb-3">
+        <input
+          type="checkbox"
+          id="shareDataCheckbox"
+          className={`form-check-input bg-dark border-secondary ${errors.shareData ? "is-invalid" : ""}`}
+          checked={formData.shareData}
+          onChange={(e) => setFormData({ ...formData, shareData: e.target.checked })}
+        />
+        <label className="form-check-label text-secondary small" htmlFor="shareDataCheckbox">
+          Share my registration data with Superapp
         </label>
-        {errors.shareData && <span className="error-text">{errors.shareData}</span>}
+        {errors.shareData && <div className="invalid-feedback text-start d-block">{errors.shareData}</div>}
       </div>
 
-      <div className="checkbox-group">
-        <label className="checkbox-label">
-          <input
-            type="checkbox"
-            checked={formData.agreeTerms}
-            onChange={(e) => setFormData({ ...formData, agreeTerms: e.target.checked })}
-          />
-          <span className="checkbox-text">
-            Agree to the terms and conditions of signing up
-          </span>
+      <div className="form-check text-start mb-3">
+        <input
+          type="checkbox"
+          id="agreeTermsCheckbox"
+          className={`form-check-input bg-dark border-secondary ${errors.agreeTerms ? "is-invalid" : ""}`}
+          checked={formData.agreeTerms}
+          onChange={(e) => setFormData({ ...formData, agreeTerms: e.target.checked })}
+        />
+        <label className="form-check-label text-secondary small" htmlFor="agreeTermsCheckbox">
+          Agree to the terms and conditions of signing up
         </label>
-        {errors.agreeTerms && <span className="error-text">{errors.agreeTerms}</span>}
+        {errors.agreeTerms && <div className="invalid-feedback text-start d-block">{errors.agreeTerms}</div>}
       </div>
 
-      <button type="submit" className="submit-btn">
+      <button type="submit" className="btn btn-success w-100 rounded-pill py-3 fw-bold mt-2 text-uppercase">
         SIGN UP
       </button>
     </form>

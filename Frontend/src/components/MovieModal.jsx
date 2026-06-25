@@ -34,71 +34,74 @@ const MovieModal = ({ imdbID, onClose }) => {
   };
 
   return (
-    <div className="movie-modal-backdrop" onClick={handleBackdropClick}>
-      <div className="movie-modal-content">
-        <button className="modal-close-btn" onClick={onClose}>
-          <X size={24} />
-        </button>
+    <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }} onClick={handleBackdropClick}>
+      <div className="modal-dialog modal-dialog-centered modal-lg">
+        <div className="modal-content bg-dark border-secondary text-white position-relative" style={{ borderRadius: "20px" }}>
+          <button className="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-3 shadow-none" onClick={onClose} aria-label="Close" />
 
-        {loading ? (
-          <div className="modal-loading">Loading movie details...</div>
-        ) : movie ? (
-          <div className="movie-details-layout">
-            <div className="modal-poster-col">
-              {!posterError ? (
-                <img
-                  src={movie.Poster && movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/300x450?text=No+Poster"}
-                  alt={movie.Title}
-                  className="modal-movie-poster"
-                  onError={() => setPosterError(true)}
-                />
-              ) : (
-                <div className="movie-poster-fallback modal-fallback">
-                  <span className="fallback-movie-icon">🎬</span>
-                  <h4 className="fallback-movie-title">{movie.Title}</h4>
+          {loading ? (
+            <div className="modal-body text-center p-5 text-secondary fs-5">Loading movie details...</div>
+          ) : movie ? (
+            <div className="modal-body p-4 p-md-5">
+              <div className="row g-4">
+                <div className="col-12 col-md-5 text-center">
+                  {!posterError ? (
+                    <img
+                      src={movie.Poster && movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/300x450?text=No+Poster"}
+                      alt={movie.Title}
+                      className="img-fluid rounded shadow-lg w-100 object-fit-cover"
+                      onError={() => setPosterError(true)}
+                      style={{ maxHeight: "400px" }}
+                    />
+                  ) : (
+                    <div className="d-flex flex-column align-items-center justify-content-center bg-secondary bg-opacity-10 rounded p-4 h-100" style={{ minHeight: "350px" }}>
+                      <span className="fs-1 mb-2">🎬</span>
+                      <h4 className="h5 text-white">{movie.Title}</h4>
+                    </div>
+                  )}
                 </div>
-              )}
+                
+                <div className="col-12 col-md-7 text-start">
+                  <h2 className="h2 fw-bold text-white mb-3 pe-4">{movie.Title}</h2>
+                  
+                  <div className="d-flex align-items-center gap-2 mb-3 text-secondary small flex-wrap">
+                    <span className="badge bg-secondary">{movie.Year}</span>
+                    <span>•</span>
+                    <span className="d-flex align-items-center gap-1">
+                      <Clock size={12} />
+                      {movie.Runtime}
+                    </span>
+                    <span>•</span>
+                    <span className="d-flex align-items-center gap-1 text-warning">
+                      <Star size={12} className="fill-warning" />
+                      {movie.imdbRating} / 10
+                    </span>
+                  </div>
+
+                  <div className="d-flex flex-wrap gap-2 mb-4">
+                    {movie.Genre && movie.Genre.split(",").map((genre) => (
+                      <span key={genre.trim()} className="badge bg-success bg-opacity-75 text-white rounded-pill px-3 py-2" style={{ fontSize: "0.8rem" }}>
+                        {genre.trim()}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mb-4">
+                    <h4 className="h6 text-success fw-bold text-uppercase mb-2" style={{ letterSpacing: "1px" }}>Plot</h4>
+                    <p className="text-light-50 small mb-0" style={{ lineHeight: "1.6" }}>{movie.Plot}</p>
+                  </div>
+
+                  <div className="mb-0">
+                    <h4 className="h6 text-success fw-bold text-uppercase mb-2" style={{ letterSpacing: "1px" }}>Cast</h4>
+                    <p className="text-light-50 small mb-0" style={{ lineHeight: "1.6" }}>{movie.Actors}</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            
-            <div className="modal-info-col">
-              <h2 className="modal-movie-title">{movie.Title}</h2>
-              
-              <div className="modal-meta-row">
-                <span className="modal-movie-year">{movie.Year}</span>
-                <span className="meta-divider">•</span>
-                <span className="modal-movie-runtime">
-                  <Clock size={14} className="meta-icon" />
-                  {movie.Runtime}
-                </span>
-                <span className="meta-divider">•</span>
-                <span className="modal-movie-rating">
-                  <Star size={14} className="meta-icon star-active" />
-                  {movie.imdbRating} / 10
-                </span>
-              </div>
-
-              <div className="modal-genres-container">
-                {movie.Genre && movie.Genre.split(",").map((genre) => (
-                  <span key={genre.trim()} className="genre-tag">
-                    {genre.trim()}
-                  </span>
-                ))}
-              </div>
-
-              <div className="modal-section">
-                <h4 className="section-title">Plot</h4>
-                <p className="section-text">{movie.Plot}</p>
-              </div>
-
-              <div className="modal-section">
-                <h4 className="section-title">Cast</h4>
-                <p className="section-text">{movie.Actors}</p>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="modal-error">Failed to load movie details.</div>
-        )}
+          ) : (
+            <div className="modal-body text-center p-5 text-danger">Failed to load movie details.</div>
+          )}
+        </div>
       </div>
     </div>
   );

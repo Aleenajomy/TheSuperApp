@@ -47,24 +47,24 @@ const NewsWidget = () => {
   };
 
   return (
-    <div className="news-widget">
-      <div className="news-image-section">
+    <div className="news-widget card border-0 shadow h-100 overflow-hidden" style={{ borderRadius: "20px" }}>
+      <div className="news-image-section position-relative overflow-hidden" style={{ height: "55%", minHeight: "220px" }}>
         <img
           src={currentArticle.urlToImage}
           alt={currentArticle.title}
-          className="news-image"
+          className="news-image w-100 h-100 object-fit-cover"
         />
-        <div className="news-gradient-overlay" />
-        <div className="news-headline-card">
-          <h3 className="news-title">{currentArticle.title}</h3>
-          <span className="news-date">
+        <div className="news-gradient-overlay position-absolute start-0 top-0 w-100 h-100" style={{ background: "linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 60%, transparent 100%)" }} />
+        <div className="news-headline-card position-absolute bottom-0 start-0 w-100 p-4 text-white text-start">
+          <h3 className="news-title h5 fw-bold mb-2" style={{ display: "-webkit-box", WebkitLineClamp: "2", WebkitBoxOrient: "vertical", overflow: "hidden" }}>{currentArticle.title}</h3>
+          <span className="news-date small text-light-50">
             {formatPublishedDate(currentArticle.publishedAt)}
           </span>
         </div>
       </div>
-      <div className="news-description-section">
-        <p className="news-description">{currentArticle.description}</p>
-        <span className="news-source">- {currentArticle.source?.name || "Source"}</span>
+      <div className="news-description-section card-body p-4 d-flex flex-column justify-content-between bg-white text-dark text-start">
+        <p className="news-description mb-3" style={{ fontSize: "0.95rem", lineHeight: "1.6", overflowY: "auto", maxHeight: "150px" }}>{currentArticle.description}</p>
+        <span className="news-source text-secondary fw-semibold small">- {currentArticle.source?.name || "Source"}</span>
       </div>
     </div>
   );

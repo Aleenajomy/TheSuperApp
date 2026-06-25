@@ -60,46 +60,46 @@ const WeatherWidget = () => {
   };
 
   return (
-    <div className="weather-widget">
-      <div className="weather-header">
+    <div className="weather-widget card border-0 text-white shadow h-100" style={{ backgroundColor: "#101426", borderRadius: "20px" }}>
+      <div className="weather-header d-flex justify-content-between px-4 py-2 text-white" style={{ backgroundColor: "#FF5E7E", borderTopLeftRadius: "20px", borderTopRightRadius: "20px", fontSize: "1.25rem", fontWeight: "700" }}>
         <span className="weather-date">{formatDate(dateTime)}</span>
         <span className="weather-time">{formatTime(dateTime)}</span>
       </div>
-      <div className="weather-body">
+      <div className="weather-body card-body d-flex flex-row align-items-center justify-content-between p-4">
         {weather ? (
           <>
-            <div className="weather-sec-left">
+            <div className="weather-sec-left d-flex flex-column align-items-center gap-2 flex-fill">
               {getWeatherIcon(weather.condition)}
-              <span className="weather-condition-text">{weather.condition}</span>
+              <span className="weather-condition-text fs-6 fw-medium text-center">{weather.condition}</span>
             </div>
-            <div className="weather-divider" />
-            <div className="weather-sec-middle">
-              <span className="weather-temp">{weather.temp}°C</span>
-              <div className="weather-sub-item">
-                <Thermometer size={16} />
-                <span>{weather.pressure} hPa Pressure</span>
+            <div className="weather-divider d-none d-sm-block bg-white bg-opacity-15" style={{ width: "1px", height: "70px", margin: "0 10px" }} />
+            <div className="weather-sec-middle d-flex flex-column align-items-center gap-1 flex-fill">
+              <span className="weather-temp display-6 fw-medium text-nowrap">{weather.temp}°C</span>
+              <div className="weather-sub-item d-flex align-items-center gap-1 small text-light bg-dark bg-opacity-25 px-2 py-1 rounded">
+                <Thermometer size={14} />
+                <span>{weather.pressure} hPa</span>
               </div>
             </div>
-            <div className="weather-divider" />
-            <div className="weather-sec-right">
-              <div className="weather-sub-item-row">
-                <Wind size={20} />
-                <div className="sub-item-detail">
-                  <span className="detail-value">{weather.windSpeed} km/h</span>
-                  <span className="detail-label">Wind</span>
+            <div className="weather-divider d-none d-sm-block bg-white bg-opacity-15" style={{ width: "1px", height: "70px", margin: "0 10px" }} />
+            <div className="weather-sec-right d-flex flex-column gap-2 flex-fill ps-2">
+              <div className="weather-sub-item-row d-flex align-items-center gap-2">
+                <Wind size={18} className="text-secondary" />
+                <div className="sub-item-detail d-flex flex-column text-start">
+                  <span className="detail-value small fw-bold">{weather.windSpeed} km/h</span>
+                  <span className="detail-label text-secondary" style={{ fontSize: "0.75rem" }}>Wind</span>
                 </div>
               </div>
-              <div className="weather-sub-item-row">
-                <Droplets size={20} />
-                <div className="sub-item-detail">
-                  <span className="detail-value">{weather.humidity}%</span>
-                  <span className="detail-label">Humidity</span>
+              <div className="weather-sub-item-row d-flex align-items-center gap-2">
+                <Droplets size={18} className="text-secondary" />
+                <div className="sub-item-detail d-flex flex-column text-start">
+                  <span className="detail-value small fw-bold">{weather.humidity}%</span>
+                  <span className="detail-label text-secondary" style={{ fontSize: "0.75rem" }}>Humidity</span>
                 </div>
               </div>
             </div>
           </>
         ) : (
-          <div className="weather-loading">Loading weather data...</div>
+          <div className="weather-loading text-center w-100 p-4 text-secondary">Loading weather data...</div>
         )}
       </div>
     </div>

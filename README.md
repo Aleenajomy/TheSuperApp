@@ -69,8 +69,8 @@ graph TD
 - User registration data, selected category chips, and note texts are stored and synchronized inside `localStorage` for complete session persistence.
 
 ### Styling & Responsiveness
-- Styled entirely using **Vanilla CSS** with Google Fonts (`Outfit` and `Single Day`).
-- Breakpoints configured at `1024px`, `768px`, `600px`, and `480px` to scale padding, gap margins, layout grids, and widget alignments cleanly.
+- Styled using **Bootstrap 5** alongside custom **CSS** overrides with Google Fonts (`Outfit` and `Single Day`).
+- Leverages Bootstrap's responsive grid system (`row`, `col`, spacing utilities) to handle margins, padding, layout grids, and widget alignments cleanly across various screen sizes.
 - Implements mobile layouts where components stack vertically, and the timer inputs scale dynamically down to `320px` viewports without any clipping.
 
 ---

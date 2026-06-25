@@ -37,43 +37,47 @@ const Movies = () => {
   }, [categories]);
 
   return (
-    <div className="movies-page">
-      <header className="movies-header">
-        <h1 className="brand-logo" onClick={() => navigate("/dashboard")} style={{ cursor: "pointer" }}>
+    <div className="movies-page container-fluid min-vh-100 p-4 p-md-5 bg-black text-white text-start">
+      <header className="movies-header d-flex justify-content-between align-items-center mb-5">
+        <h1 className="brand-logo mb-0" onClick={() => navigate("/dashboard")} style={{ cursor: "pointer" }}>
           Super app
         </h1>
         <img
           src={avatarImg}
           alt="User Profile"
-          className="header-profile-avatar"
+          className="header-profile-avatar rounded-circle border border-2 border-white cursor-pointer"
+          style={{ width: "45px", height: "45px" }}
           onClick={() => navigate("/dashboard")}
           title="Go to Dashboard"
         />
       </header>
 
       <main className="movies-content">
-        <h2 className="movies-page-title">Entertainment according to your choice</h2>
+        <h2 className="movies-page-title display-6 fw-bold mb-4">Entertainment according to your choice</h2>
 
         {loading ? (
-          <div className="movies-loading-state">Loading your personalized movie recommendations...</div>
+          <div className="movies-loading-state text-center py-5 text-secondary fs-5">Loading your personalized movie recommendations...</div>
         ) : (
-          <div className="movies-category-list">
+          <div className="movies-category-list d-flex flex-column gap-5">
             {categories.map((category) => {
               const movies = moviesData[category] || [];
               return (
                 <div key={category} className="category-movies-row-container">
-                  <h3 className="category-row-title">{category}</h3>
-                  <div className="movies-row">
+                  <h3 className="category-row-title h3 fw-bold text-success mb-3">{category}</h3>
+                  <div className="row row-cols-2 row-cols-md-4 g-4">
                     {movies.length > 0 ? (
                       movies.slice(0, 4).map((movie) => (
-                        <MovieCard
-                          key={movie.imdbID}
-                          movie={movie}
-                          onClick={() => setSelectedMovieId(movie.imdbID)}
-                        />
+                        <div className="col" key={movie.imdbID}>
+                          <MovieCard
+                            movie={movie}
+                            onClick={() => setSelectedMovieId(movie.imdbID)}
+                          />
+                        </div>
                       ))
                     ) : (
-                      <p className="no-movies-fallback">No movies found for this category.</p>
+                      <div className="col-12">
+                        <p className="no-movies-fallback text-secondary">No movies found for this category.</p>
+                      </div>
                     )}
                   </div>
                 </div>

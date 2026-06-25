@@ -120,14 +120,15 @@ const TimerWidget = () => {
   const strokeDashoffset = circumference - progressPercent * circumference;
 
   return (
-    <div className="timer-widget">
-      <div className="timer-left-circle">
-        <svg className="timer-svg" viewBox="0 0 200 200">
+    <div className="timer-widget d-flex flex-column flex-sm-row align-items-center justify-content-around gap-4 p-4 h-100">
+      <div className="timer-left-circle position-relative d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: "160px", height: "160px" }}>
+        <svg className="timer-svg w-100 h-100" viewBox="0 0 200 200">
           <circle
             cx="100"
             cy="100"
             r={radius}
             className="timer-circle-bg"
+            stroke="#121528"
             strokeWidth="8"
             fill="transparent"
           />
@@ -136,93 +137,103 @@ const TimerWidget = () => {
             cy="100"
             r={radius}
             className="timer-circle-progress"
+            stroke="#FF5E7E"
             strokeWidth="8"
             fill="transparent"
             strokeDasharray={circumference}
             strokeDashoffset={strokeDashoffset}
             strokeLinecap="round"
             transform="rotate(-90 100 100)"
+            style={{ transition: "stroke-dashoffset 0.1s linear" }}
           />
         </svg>
-        <div className="timer-text-display">
+        <div className="timer-text-display position-absolute fs-4 fw-medium text-white">
           {formatTimeDigits(secondsLeft)}
         </div>
       </div>
 
-      <div className="timer-right-controls">
-        <div className="timer-inputs-selectors">
-          <div className="selector-col">
-            <span className="selector-label">Hours</span>
+      <div className="timer-right-controls d-flex flex-column align-items-center gap-3 flex-grow-1">
+        <div className="timer-inputs-selectors d-flex align-items-center justify-content-center gap-3 w-100">
+          <div className="selector-col d-flex flex-column align-items-center" style={{ width: "60px" }}>
+            <span className="selector-label small text-secondary text-uppercase mb-1" style={{ letterSpacing: "0.5px" }}>Hours</span>
             <button
               onClick={() => adjust("hours", "up")}
               disabled={isRunning}
-              className="arrow-btn"
+              className="btn btn-link p-0 text-secondary border-0 shadow-none"
+              style={{ color: "#7F8C8D" }}
             >
-              <ChevronUp size={24} />
+              <ChevronUp size={20} />
             </button>
-            <span className="selector-value">{String(hours).padStart(2, "0")}</span>
+            <span className="selector-value fs-3 fw-bold text-white my-1">{String(hours).padStart(2, "0")}</span>
             <button
               onClick={() => adjust("hours", "down")}
               disabled={isRunning}
-              className="arrow-btn"
+              className="btn btn-link p-0 text-secondary border-0 shadow-none"
+              style={{ color: "#7F8C8D" }}
             >
-              <ChevronDown size={24} />
+              <ChevronDown size={20} />
             </button>
           </div>
 
-          <div className="selector-colon">:</div>
+          <div className="selector-colon fs-3 fw-bold text-white mb-2">:</div>
 
-          <div className="selector-col">
-            <span className="selector-label">Minutes</span>
+          <div className="selector-col d-flex flex-column align-items-center" style={{ width: "60px" }}>
+            <span className="selector-label small text-secondary text-uppercase mb-1" style={{ letterSpacing: "0.5px" }}>Minutes</span>
             <button
               onClick={() => adjust("minutes", "up")}
               disabled={isRunning}
-              className="arrow-btn"
+              className="btn btn-link p-0 text-secondary border-0 shadow-none"
+              style={{ color: "#7F8C8D" }}
             >
-              <ChevronUp size={24} />
+              <ChevronUp size={20} />
             </button>
-            <span className="selector-value">{String(minutes).padStart(2, "0")}</span>
+            <span className="selector-value fs-3 fw-bold text-white my-1">{String(minutes).padStart(2, "0")}</span>
             <button
               onClick={() => adjust("minutes", "down")}
               disabled={isRunning}
-              className="arrow-btn"
+              className="btn btn-link p-0 text-secondary border-0 shadow-none"
+              style={{ color: "#7F8C8D" }}
             >
-              <ChevronDown size={24} />
+              <ChevronDown size={20} />
             </button>
           </div>
 
-          <div className="selector-colon">:</div>
+          <div className="selector-colon fs-3 fw-bold text-white mb-2">:</div>
 
-          <div className="selector-col">
-            <span className="selector-label">Seconds</span>
+          <div className="selector-col d-flex flex-column align-items-center" style={{ width: "60px" }}>
+            <span className="selector-label small text-secondary text-uppercase mb-1" style={{ letterSpacing: "0.5px" }}>Seconds</span>
             <button
               onClick={() => adjust("seconds", "up")}
               disabled={isRunning}
-              className="arrow-btn"
+              className="btn btn-link p-0 text-secondary border-0 shadow-none"
+              style={{ color: "#7F8C8D" }}
             >
-              <ChevronUp size={24} />
+              <ChevronUp size={20} />
             </button>
-            <span className="selector-value">{String(seconds).padStart(2, "0")}</span>
+            <span className="selector-value fs-3 fw-bold text-white my-1">{String(seconds).padStart(2, "0")}</span>
             <button
               onClick={() => adjust("seconds", "down")}
               disabled={isRunning}
-              className="arrow-btn"
+              className="btn btn-link p-0 text-secondary border-0 shadow-none"
+              style={{ color: "#7F8C8D" }}
             >
-              <ChevronDown size={24} />
+              <ChevronDown size={20} />
             </button>
           </div>
         </div>
 
-        <div className="timer-actions-container">
+        <div className="timer-actions-container d-flex justify-content-center align-items-center gap-3 w-100" style={{ maxWidth: "280px" }}>
           <button
             onClick={handleStartStop}
-            className={`timer-action-btn ${isRunning ? "running" : ""}`}
+            className="btn btn-danger btn-lg rounded-pill px-4 fw-bold flex-grow-1 text-white border-0"
+            style={{ backgroundColor: "#FF5E7E" }}
           >
             {isRunning ? "Pause" : (secondsLeft < totalSeconds && secondsLeft > 0 ? "Resume" : "Start")}
           </button>
           <button
             onClick={handleReset}
-            className="timer-reset-btn"
+            className="btn btn-outline-secondary btn-lg text-white rounded-pill px-4 fw-bold flex-grow-1 border-2"
+            style={{ borderColor: "#7F8C8D" }}
           >
             Reset
           </button>
